@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "my-store-pwa-289d3": {
+      "hosting": {
+        "my-store-pwa": [
+          "my-store-pwa-289d3"
+        ]
+      }
+    }
+  }
+}

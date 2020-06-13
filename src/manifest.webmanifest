@@ -1,6 +1,6 @@
 {
-  "name": "my-store-pwa",
-  "short_name": "my-store-pwa",
+  "name": "My Store",
+  "short_name": "My Store PWA",
   "theme_color": "#1976d2",
   "background_color": "#fafafa",
   "display": "standalone",

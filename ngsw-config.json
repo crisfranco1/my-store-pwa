@@ -31,7 +31,7 @@
     {
       "name": "api",
       "urls": [
-        "https://my-store-289d3.web.app/**"
+        "https://platzi-store.herokuapp.com/**"
       ],
       "cacheConfig": {
         "maxSize": 3,

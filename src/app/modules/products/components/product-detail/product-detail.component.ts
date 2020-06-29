@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { catchError } from 'rxjs/operators';
 
 import { ProductsService } from '../../../core/services/products.service';
 import { Product } from 'src/app/models/product';
+import { throwError } from 'rxjs';
 
 @Component({
   selector: 'app-product-detail',
@@ -21,7 +23,12 @@ export class ProductDetailComponent implements OnInit {
 
   getProductById(): void {
     const productId = this.activatedRoute.snapshot.paramMap.get('id');
-    this.productsService.getProductById(productId).subscribe(product => this.product = product);
+    this.productsService.getProductById(productId).subscribe(
+      product => { this.product = product; },
+      error => {
+        console.error(error);
+      }
+    );
   }
 
 }

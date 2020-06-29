@@ -14,7 +14,13 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "@core/*": ["src/app/modules/core/*"],
+      "@material/*": ["src/app/modules/angular-material/*"],
+      "@shared/*": ["src/app/modules/shared/*"],
+      "@admin/*": ["src/app/modules/admin/*"],
+    }
   },
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,

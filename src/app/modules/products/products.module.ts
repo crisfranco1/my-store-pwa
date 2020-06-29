@@ -5,13 +5,13 @@ import { AngularMaterialModule } from '../angular-material/angular-material.modu
 import { ProductsRoutingModule } from './products-routing.module';
 
 import { ProductComponent } from './components/product/product.component';
-import { ProductsComponent } from './components/products/products.component';
+import { ProductsContainer } from './containers/products/products.container'
 import { ProductDetailComponent } from './components/product-detail/product-detail.component';
 
 @NgModule({
   declarations: [
     ProductComponent,
-    ProductsComponent,
+    ProductsContainer,
     ProductDetailComponent
   ],
   imports: [

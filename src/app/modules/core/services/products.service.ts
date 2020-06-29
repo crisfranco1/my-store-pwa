@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+import * as Sentry from '@sentry/browser';
 import { environment } from '../../../../environments/environment';
 import { Product } from '../../../models/product';
 
@@ -18,11 +20,13 @@ export class ProductsService {
   }
 
   getAllProducts(): Observable<Product[]> {
-    return this.httpClient.get<Product[]>(this.productsUrl);
+    return this.httpClient.get<Product[]>(this.productsUrl).pipe(
+      catchError(this.handlerError));
   }
 
   getProductById(productId: string): Observable<Product> {
-    return this.httpClient.get<Product>(`${this.productsUrl}/${productId}`);
+    return this.httpClient.get<Product>(`${this.productsUrl}/${productId}`).pipe(
+      catchError(this.handlerError));
   }
 
   updateProduct(productId: string, product: Partial<Product>): Observable<Product> {
@@ -31,6 +35,12 @@ export class ProductsService {
 
   deleteProductById(productId: string): Observable<boolean> {
     return this.httpClient.delete<boolean>(`${this.productsUrl}/${productId}`);
+  }
+
+  private handlerError(httpErrorResponse: HttpErrorResponse) {
+    console.error(httpErrorResponse);
+    Sentry.captureException(httpErrorResponse);
+    return throwError('Some error');
   }
 
 }

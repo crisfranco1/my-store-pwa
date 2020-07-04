@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError, retry } from 'rxjs/operators';
 import * as Sentry from '@sentry/browser';
 import { environment } from '../../../../environments/environment';
 import { Product } from '../../../models/product';
@@ -21,6 +21,7 @@ export class ProductsService {
 
   getAllProducts(): Observable<Product[]> {
     return this.httpClient.get<Product[]>(this.productsUrl).pipe(
+      retry(3),
       catchError(this.handlerError));
   }
 
@@ -35,6 +36,11 @@ export class ProductsService {
 
   deleteProductById(productId: string): Observable<boolean> {
     return this.httpClient.delete<boolean>(`${this.productsUrl}/${productId}`);
+  }
+
+  getFile()  {
+    // O url de donde esta el archivo
+    return this.httpClient.get('assets/files/hello.txt', { responseType: 'text' });
   }
 
   private handlerError(httpErrorResponse: HttpErrorResponse) {

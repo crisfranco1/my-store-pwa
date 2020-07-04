@@ -35,6 +35,12 @@ export class LoginComponent implements OnInit {
     }
   }
 
+  loginWithRestApi() {
+    this.authService.loginWithRestApi('nicolas@nicola.com', '123456').subscribe(data => {
+      console.log(data);
+    });
+  }
+
 
   private buildForm() {
     this.form = this.formBuilder.group({
@@ -42,5 +48,8 @@ export class LoginComponent implements OnInit {
       password: ['', [Validators.required]],
     });
   }
+
+
+
 
 }

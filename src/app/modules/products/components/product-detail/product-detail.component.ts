@@ -5,6 +5,7 @@ import { catchError } from 'rxjs/operators';
 import { ProductsService } from '../../../core/services/products.service';
 import { Product } from 'src/app/models/product';
 import { throwError } from 'rxjs';
+import { Content } from '@angular/compiler/src/render3/r3_ast';
 
 @Component({
   selector: 'app-product-detail',
@@ -29,6 +30,12 @@ export class ProductDetailComponent implements OnInit {
         console.error(error);
       }
     );
+  }
+
+  getFile() {
+    this.productsService.getFile().subscribe(content => {
+      console.log(content);
+    });
   }
 
 }
